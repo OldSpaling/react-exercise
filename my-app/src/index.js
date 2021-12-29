@@ -14,7 +14,7 @@ import './index.css';
 /**
  * 函数式组件
  */
-function Square(props){
+function Square(props) {
   return (
     <button className="square" onClick={() => { props.onClick() }}>
       {props.value}
@@ -23,40 +23,23 @@ function Square(props){
 }
 
 class Board extends React.Component {
-  constructor(props){
-    super(props);
-    this.state={
-      squares:Array(9).fill(null),
-      xIsNext:true
-    };
-  }
+  // constructor(props){
+  //   super(props);
+  //   this.state={
+  //     squares:Array(9).fill(null),
+  //     xIsNext:true
+  //   };
+  // }
   renderSquare(i) {
-    return <Square 
-    value={this.state.squares[i]} 
-    onClick={()=>this.handleClick(i)}
+    return <Square
+      value={this.props.squares[i]}
+      onClick={() => this.props.onClick(i)}
     />;
   }
-  handleClick(i) {
-    //为了保证this.state值不变，使component数据纯粹和数据可追溯，重新复制一份数据copy
-    const squares = this.state.squares.slice();
-    if(calculateWinner(squares)||squares[i]){
-      return;
-    }
-    squares[i] = this.state.xIsNext?'X':'O';
-    this.setState({ squares: squares,xIsNext:!this.state.xIsNext });
-  }
+ 
   render() {
-    // const status = `Next player: ${this.state.xIsNext ? 'X' : 'O'}`;
-    const winner=calculateWinner(this.state.squares);
-    let status;
-    if(winner){
-      status=`Winner:${winner}`;
-    }else{
-      status = `Next player: ${this.state.xIsNext ? 'X' : 'O'}`;
-    }
     return (
       <div>
-        <div className="status">{status}</div>
         <div className="board-row">
           {this.renderSquare(0)}
           {this.renderSquare(1)}
@@ -78,15 +61,80 @@ class Board extends React.Component {
 }
 
 class Game extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      history: [{
+        squares: Array(9).fill(null),
+      }],
+      xIsNext: true,
+      stepNumber:0
+    };
+  }
+  handleClick(i) {
+    const history = this.state.history.slice(0,this.state.stepNumber+1);
+    const current = history[history.length - 1];
+    const squares = current.squares.slice();
+    if (calculateWinner(squares) || squares[i]) {
+      return;
+    }
+    squares[i] = this.state.xIsNext ? 'X' : 'O';
+    this.setState({
+      history: [...history, { squares }],//不使用push，会改变原数组
+      xIsNext: !this.state.xIsNext,
+      stepNumber:history.length
+    });
+  }
+  jumpTo(step){
+    /**
+     * 们没有更新 state 中的 history 属性。
+     * 这是因为 state 更新被合并了，
+     * 或者用更简单的话说，React 不会更新 setState 
+     * 方法中未提到的属性
+     */
+    this.setState({
+      stepNumber:step,
+      xIsNext:(step%2)===0
+    })
+  }
   render() {
+    const history = this.state.history;
+    const current = history[this.state.stepNumber];
+    const winner = calculateWinner(current.squares);
+    const moves = history.map((step, move) => {
+      const desc = move ? `Go to move #${move}` : 'go to game start';
+      /**
+       * 每当一个列表重新渲染时，React 会根据每一项列表元素的 key 
+       * 来检索上一次渲染时与每个 key 所匹配的列表项。
+       * 如果 React 发现当前的列表有一个之前不存在的 key，
+       * 那么就会创建出一个新的组件。如果 React 发现和之前对比少了一个 key，
+       * 那么就会销毁之前对应的组件。如果一个组件的 key 发生了变化，这个组件会被销毁，
+       * 然后使用新的 state 重新创建一份
+       * 我们强烈推荐，每次只要你构建动态列表的时候，都要指定一个合适的 key
+       */
+      return (
+        <li key={move}>
+          <button onClick={()=>this.jumpTo(move)}>{desc}</button>
+        </li>
+      );
+    })
+    let status;
+    if (winner) {
+      status = `Winner:${winner}`;
+    } else {
+      status = `Next player:${this.state.xIsNext ? 'X' : 'O'}`;
+    }
     return (
       <div className="game">
         <div className="game-board">
-          <Board />
+          <Board
+            squares={current.squares}
+            onClick={(i) => this.handleClick(i)}
+          />
         </div>
         <div className="game-info">
-          <div>{/* status */}</div>
-          <ol>{/* TODO */}</ol>
+          <div>{status}</div>
+          <ol>{moves}</ol>
         </div>
       </div>
     );
