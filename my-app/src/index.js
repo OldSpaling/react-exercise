@@ -1,15 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-class Square extends React.Component {
-  render() {
-    //onClick用箭头函数，避免this指向不期望值
-    return (
-      <button className="square" onClick={() => { this.props.onClick() }}>
-        {this.props.value}
-      </button>
-    );
-  }
+// class Square extends React.Component {
+//   render() {
+//     //onClick用箭头函数，避免this指向不期望值
+//     return (
+//       <button className="square" onClick={() => { this.props.onClick() }}>
+//         {this.props.value}
+//       </button>
+//     );
+//   }
+// }
+/**
+ * 函数式组件
+ */
+function Square(props){
+  return (
+    <button className="square" onClick={() => { props.onClick() }}>
+      {props.value}
+    </button>
+  );
 }
 
 class Board extends React.Component {
