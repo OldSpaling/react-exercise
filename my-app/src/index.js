@@ -1,30 +1,22 @@
 import React from 'react';
 import ReactDom from 'react-dom';
 
-class Clock extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { time: new Date };
-  }
-  /**
-   * 组件第一次被渲染到Dom时候触发
-   */
-  componentDidMount(){
-    this.timeID=setInterval(()=>this.tick(),1000);
-  }
-  /**
-   * 组件从dom中移除时候触发
-   */
-  componentWillUnmount(){
-    clearInterval(this.timeID);
-  }
-  tick(){
-    this.setState({time:new Date})
-  }
-  render() {
-    return <div>{this.state.time.toLocaleTimeString()}</div>
+class Dialog extends React.Component{
+  render(){
+    return (
+      <div style={{border:`1px solid ${this.props.color||'red'}`}}>
+        {this.props.children}
+        {this.props.name}
+        {this.props.btn}
+      </div>
+    );
   }
 }
+const btn=<button>按钮</button>
+const dialog=<Dialog name='lizhao' color="green" btn={btn}>
+  <h1>Welcome title</h1>
+  <p>welcome content</p>
+</Dialog>
 ReactDom.render(
-  <Clock/>,
+  dialog,
   document.getElementById('root'));
