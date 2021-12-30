@@ -1,27 +1,25 @@
 import React from 'react';
 import ReactDom from 'react-dom';
-function MyTest(){
-  return <div>
-    <p>this is my test for Component in Component</p>
-  </div>;
-}
-class Dialog extends React.Component{
-  render(){
-    return (
-      <div style={{border:`1px solid ${this.props.color||'red'}`}}>
-        {this.props.children}
-        {this.props.name}
-        {this.props.btn}
-      </div>
-    );
+import { nanoid } from 'nanoid';
+let data = [
+  { name: "test1" },
+  { name: "test2" },
+  { name: "test3" },
+  { name: "test4" }
+];
+ data.forEach(o => o.key = nanoid());
+class ListItem extends React.Component {
+  render() {
+    return <li >{this.props.name}</li>;
   }
 }
-const btn=<button>按钮</button>
-const dialog=<Dialog name='lizhao' color="green" btn={btn}>
-  <h1>Welcome title</h1>
-  <p>welcome content</p>
-  <MyTest></MyTest>
-</Dialog>
+class List extends React.Component{
+  render(){
+    const items = data.map(o => <ListItem key={o.key} name={o.name} ></ListItem>)
+    return <ul>{items}</ul>
+  }
+}
+// const lists=<ul><ListItems/></ul>
 ReactDom.render(
-  dialog,
+  <List></List>,
   document.getElementById('root'));
