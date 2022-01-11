@@ -9,9 +9,10 @@ import './index.css';
 reactDom.render(
     <BrowserRouter >
         <Routes>
-            <Route path="/" element={<App />}></Route>
-            <Route path="expenses" element={<Expense />}></Route>
-            <Route path="invoices" element={<Invoices />}></Route>
+            <Route path="/" element={<App />}>
+                <Route path="expenses" element={<Expense />}></Route>
+                <Route path="invoices" element={<Invoices />}></Route>
+            </Route>
         </Routes>
     </BrowserRouter>,
     document.getElementById('root'));
