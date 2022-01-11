@@ -1,4 +1,4 @@
-import AppComponent from "./components/app.component";
+import AppComponent from "./app.component";
 import DashboardComponent from "./components/dashboard.component";
 import AboutComponent from "./components/about.component";
 import IndexComponent from "./components/index.component";
