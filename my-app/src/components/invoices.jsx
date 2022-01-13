@@ -1,10 +1,12 @@
 import React from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
 import { getInvoices } from '../data';
+import "./invoices.css";
 export default class Invoices extends React.Component {
     constructor(props) {
         super(props);
         this.activeLinkByStyle = this.activeLinkByStyle.bind(this);
+        this.activeLinkByClass = this.activeLinkByClass.bind(this);
     }
     activeLinkByStyle({ isActive }) {
         return {
@@ -12,6 +14,9 @@ export default class Invoices extends React.Component {
             margin: "1rem 0",
             color: isActive ? "red" : ""
         };
+    }
+    activeLinkByClass({isActive}) {
+        return isActive ? "red" : "blue";
     }
     render() {
         const invoices = getInvoices();
@@ -23,7 +28,7 @@ export default class Invoices extends React.Component {
                 }}>
                     {
                         invoices.map(invoice => (
-                            <NavLink style={this.activeLinkByStyle} to={`/invoices/${invoice.number}`} key={invoice.number}>
+                            <NavLink className={this.activeLinkByClass} to={`/invoices/${invoice.number}`} key={invoice.number}>
                                 {invoice.name}
                             </NavLink>
                         ))
