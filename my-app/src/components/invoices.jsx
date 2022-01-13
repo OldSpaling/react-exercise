@@ -2,11 +2,14 @@ import React from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
 import { getInvoices } from '../data';
 import "./invoices.css";
-export default class Invoices extends React.Component {
+import { withSearchParams } from "../hocs";
+class Invoices extends React.Component {
     constructor(props) {
         super(props);
         this.activeLinkByStyle = this.activeLinkByStyle.bind(this);
         this.activeLinkByClass = this.activeLinkByClass.bind(this);
+        this.handleSearchChange = this.handleSearchChange.bind(this);
+        this.search = this.search.bind(this);
     }
     activeLinkByStyle({ isActive }) {
         return {
@@ -15,8 +18,23 @@ export default class Invoices extends React.Component {
             color: isActive ? "red" : ""
         };
     }
-    activeLinkByClass({isActive}) {
+    activeLinkByClass({ isActive }) {
         return isActive ? "red" : "blue";
+    }
+    handleSearchChange(event) {
+        const filter = event.target.value;
+        if (filter) {
+            this.props.setSearchParams({ filter });
+        } else {
+            this.props.setSearchParams({});
+        }
+    }
+    search(invoice) {
+        let filter = this.props.searchParams.get("filter");
+        if (!filter) return true;
+        let name = invoice.name.toLowerCase();
+       
+        return name.startsWith(filter.toLowerCase());
     }
     render() {
         const invoices = getInvoices();
@@ -26,8 +44,12 @@ export default class Invoices extends React.Component {
                     borderRight: "solid 1px",
                     padding: "1rem"
                 }}>
+                    <input type="text"
+                        value={this.props.searchParams.get("filter") || ""}
+                        onChange={this.handleSearchChange}
+                    />
                     {
-                        invoices.map(invoice => (
+                        invoices.filter(this.search).map(invoice => (
                             <NavLink className={this.activeLinkByClass} to={`/invoices/${invoice.number}`} key={invoice.number}>
                                 {invoice.name}
                             </NavLink>
@@ -39,3 +61,4 @@ export default class Invoices extends React.Component {
         );
     }
 }
+export default withSearchParams(Invoices);

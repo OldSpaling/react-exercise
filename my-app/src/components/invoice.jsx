@@ -2,7 +2,7 @@ import React from "react";
 // import { useParams, withParams} from "react-router-dom";
 // import { withParams} from 'react-router';
 import { getInvoice } from "../data";
-import withParams from "../hocs";
+import { withParams} from "../hocs";
 //useParams 获取路由param,不能使用class component
 // export default function Invoice() {
 //     const params = useParams();
