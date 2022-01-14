@@ -2,9 +2,9 @@ import React from 'react';
 import reactDom from 'react-dom';
 import { BrowserRouter, Route, Routes} from "react-router-dom";
 import App from './app.component';
-import Expense from './components/expense';
-import Invoice from './components/invoice';
-import Invoices from './components/invoices';
+import Expense from './pages/expense';
+import Invoice from './pages/invoice';
+import Invoices from './pages/invoices';
 import './index.css';
 //The "*" has special meaning here. It will match only when no other routes do.
 reactDom.render(

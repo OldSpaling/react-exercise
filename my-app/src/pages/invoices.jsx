@@ -3,6 +3,7 @@ import { NavLink, Outlet } from 'react-router-dom';
 import { getInvoices } from '../data';
 import "./invoices.css";
 import { withSearchParams } from "../hocs";
+import QueryNavLink from '../components/query-nav-link';
 class Invoices extends React.Component {
     constructor(props) {
         super(props);
@@ -33,7 +34,7 @@ class Invoices extends React.Component {
         let filter = this.props.searchParams.get("filter");
         if (!filter) return true;
         let name = invoice.name.toLowerCase();
-       
+
         return name.startsWith(filter.toLowerCase());
     }
     render() {
@@ -50,9 +51,9 @@ class Invoices extends React.Component {
                     />
                     {
                         invoices.filter(this.search).map(invoice => (
-                            <NavLink className={this.activeLinkByClass} to={`/invoices/${invoice.number}`} key={invoice.number}>
+                            <QueryNavLink className={this.activeLinkByClass} to={`/invoices/${invoice.number}`} key={invoice.number}>
                                 {invoice.name}
-                            </NavLink>
+                            </QueryNavLink>
                         ))
                     }
                 </nav>
