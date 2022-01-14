@@ -1,4 +1,4 @@
-import { useLocation, useParams, useSearchParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 //解决class component 不能使用userParams()的问题
 export function withParams(Component) {
     return props => <Component {...props} params={useParams()} />;
@@ -16,6 +16,14 @@ export function withLocation(Component) {
         const location = useLocation();
         return (
             <Component  {...props} to={props.to + location.search} />
+        );
+    }
+}
+export function withNavigate(Component) {
+    return props => {
+        const navigate = useNavigate();
+        return (
+            <Component  {...props} navigate={navigate} />
         );
     }
 }
