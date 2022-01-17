@@ -10,7 +10,7 @@ class Invoices extends React.Component {
         this.activeLinkByStyle = this.activeLinkByStyle.bind(this);
         this.activeLinkByClass = this.activeLinkByClass.bind(this);
         this.handleSearchChange = this.handleSearchChange.bind(this);
-        this.search = this.search.bind(this);
+        // this.search = this.search.bind(this);
     }
     activeLinkByStyle({ isActive }) {
         return {
@@ -30,7 +30,7 @@ class Invoices extends React.Component {
             this.props.setSearchParams({});
         }
     }
-    search(invoice) {
+    search=(invoice)=>{
         let filter = this.props.searchParams.get("filter");
         if (!filter) return true;
         let name = invoice.name.toLowerCase();

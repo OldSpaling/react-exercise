@@ -50,6 +50,11 @@ class Invoice extends React.Component{
         // const params = useParams();
         // let invoice = getInvoice(+this.props.params.invoiceId);
         //  this.load();
+         //待修改 用hook
+         const invoice = getInvoice(+this.props.params.invoiceId);
+        //  this.setState({
+        //      invoice
+        //  })
         return (
             <main style={{ padding: "1rem" }}>
                 <h2>Total Due:{this.state.invoice.amount}</h2>
