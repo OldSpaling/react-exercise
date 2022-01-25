@@ -4,6 +4,7 @@ import Expense from './pages/expense';
 import Invoice from './pages/invoice';
 import Invoices from './pages/invoices';
 import './index.css';
+import { AuthProvider, LoginPage } from "./components/auth";
 class Layout extends React.Component {
     render() {
         return (
@@ -82,6 +83,10 @@ export default function App() {
         element: <PageLayout />,//模板页面 不配置路由 /privacy 和/tos都会自动匹配
         children: [
             {
+                path:"login",
+                element:<LoginPage/>
+            },
+            {
                 path: "privacy",
                 element:<Privacy/>
             },
@@ -96,7 +101,7 @@ export default function App() {
     return (
         <div>
             <h1>this a object router demo with layout</h1>
-            {routerEle}
+            <AuthProvider>{routerEle}</AuthProvider>
         </div>
     );
 }

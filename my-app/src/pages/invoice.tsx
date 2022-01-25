@@ -9,9 +9,9 @@ export default function Invoice() {
         {
             invoice: {
                 name: "",
-                number: undefined,
+                number: -1,
                 amount: '',
-                due: undefined
+                due: ""
             }
         }
     );
@@ -23,7 +23,8 @@ export default function Invoice() {
     }
     React.useEffect(() => {
         const getInvoiceAsync = async () => {
-            const invoice = await getInvoice(+params.invoiceId);
+            //params.invoiceId! ver+'!' 断言不为空
+            const invoice = await getInvoice(+params.invoiceId!);
             setState({ invoice })
         }
         if (params.invoiceId) {
