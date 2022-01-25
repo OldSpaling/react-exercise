@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink, Outlet } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import { getInvoices } from '../data';
 import "./invoices.css";
 import { withSearchParams } from "../hocs";
@@ -30,7 +30,7 @@ class Invoices extends React.Component {
             this.props.setSearchParams({});
         }
     }
-    search=(invoice)=>{
+    search = (invoice) => {
         let filter = this.props.searchParams.get("filter");
         if (!filter) return true;
         let name = invoice.name.toLowerCase();
