@@ -9,25 +9,25 @@ type StateModel = {
 export default function Invoices() {
     const [searchParams, setSearchParams] = useSearchParams();
     const [state, setState] = useState<StateModel>({ invoices: [] })
-    const activeLinkByStyle=({ isActive }) =>{
+    const activeLinkByStyle=({ isActive }:{isActive:boolean}) =>{
         return {
             display: "block",
             margin: "1rem 0",
             color: isActive ? "red" : ""
         };
     }
-    const activeLinkByClass = ({ isActive })=>{
+    const activeLinkByClass = ({ isActive }: { isActive: boolean })=>{
         return isActive ? "red" : "blue";
     };
-    const handleSearchChange = (event) => {
-        const filter = event.target.value;
+    const handleSearchChange = (event: React.FormEvent<HTMLInputElement>) => {
+        const filter = event.currentTarget.value;
         if (filter) {
             setSearchParams({ filter });
         } else {
             setSearchParams({});
         }
     };
-    const search = (invoice) => {
+    const search = (invoice:InvoiceModel) => {
         let filter = searchParams.get("filter");
         if (!filter) return true;
         let name = invoice.name.toLowerCase();

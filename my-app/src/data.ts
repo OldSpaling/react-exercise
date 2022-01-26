@@ -50,7 +50,7 @@ export function getInvoice(number: number) {
             const invoice = invoices.find(
                 invoice => invoice.number === number
             );
-            resolve(invoice);
+            resolve(invoice as InvoiceModel);
         }, 1000);
     })
 

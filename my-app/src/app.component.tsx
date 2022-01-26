@@ -1,10 +1,10 @@
 import React from "react";
-import { Link, Outlet, useRoutes } from "react-router-dom";
+import { Link, Outlet, RouteObject, useRoutes } from "react-router-dom";
 import Expense from './pages/expense';
 import Invoice from './pages/invoice';
 import Invoices from './pages/invoices';
 import './index.css';
-import { AuthProvider, LoginPage } from "./components/auth";
+import { AuthProvider, AuthStatus, LoginPage, RequireAuth } from "./components/auth";
 class Layout extends React.Component {
     render() {
         return (
@@ -14,10 +14,13 @@ class Layout extends React.Component {
                     <Link to="/invoices">Invoices</Link>|
                     <Link to="/expenses">Expense</Link>|
                     <Link to="privacy">Privacy</Link>|
-                    <Link to="tos">Tos</Link>
+                    <Link to="tos">Tos</Link>|
+                    <Link to="/signout">Sign Out</Link>
                 </nav>
                 <main>
-                    <Outlet></Outlet>
+                    <RequireAuth>
+                        <Outlet></Outlet>
+                    </RequireAuth>
                 </main>
             </div>
         )
@@ -42,7 +45,7 @@ function Tos() {
     );
 }
 export default function App() {
-    const routes = [{
+    const routes:RouteObject[] = [{
         path: "/",
         element: <Layout />,
         children: [
@@ -82,6 +85,10 @@ export default function App() {
     }, {
         element: <PageLayout />,//模板页面 不配置路由 /privacy 和/tos都会自动匹配
         children: [
+            {
+                path:"signout",
+                element: <AuthStatus/>
+            },
             {
                 path:"login",
                 element:<LoginPage/>
