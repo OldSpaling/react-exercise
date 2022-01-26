@@ -2,9 +2,11 @@ import React from "react";
 import { Link, Outlet, RouteObject, useRoutes } from "react-router-dom";
 import Expense from './pages/expense';
 import Invoice from './pages/invoice';
-import Invoices from './pages/invoices';
+// import Invoices from './pages/invoices';
 import './index.css';
 import { AuthProvider, AuthStatus, LoginPage, RequireAuth } from "./components/auth";
+//lazy loading
+const Invoices = React.lazy(() => import("./pages/invoices"));
 class Layout extends React.Component {
     render() {
         return (
@@ -55,7 +57,11 @@ export default function App() {
             },
             {
                 path: "invoices",
-                element: <Invoices />,
+                element: (
+                    <React.Suspense fallback={<>...</>}>
+                        <Invoices />
+                    </React.Suspense>
+                ),
                 children: [
                     {
                         index: true,
