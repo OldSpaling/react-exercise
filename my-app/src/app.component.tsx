@@ -127,17 +127,19 @@ export default function App() {
         ]
     }
     ];
-    if(state?.backgroundLocation){
-        routes.push({
-            path: "gallery/img/:id",
-            element: <Model><ImageView /></Model>
-        })
-    }
     const routerEle = useRoutes(routes, state?.backgroundLocation || location);
+    const routes2: RouteObject[] = [{
+        path: "gallery/img/:id",
+        element: <Model><ImageView /></Model>
+    }];
+    const rouerEle2 = useRoutes(routes2);
     return (
         <div>
             <h1>this a object router demo with layout</h1>
-            <AuthProvider>{routerEle}</AuthProvider>
+            <AuthProvider>
+                {routerEle}
+                {state?.backgroundLocation&&rouerEle2}
+            </AuthProvider>
         </div>
     );
 }

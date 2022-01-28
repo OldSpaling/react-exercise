@@ -1,7 +1,7 @@
 import Dialog from "@reach/dialog";
 import React from "react";
 import { useNavigate } from "react-router";
-
+import "@reach/dialog/styles.css";
 export function Model({ children }: { children: JSX.Element }) {
     const navigate = useNavigate();
     const buttonRef = React.useRef<HTMLButtonElement>(null);
