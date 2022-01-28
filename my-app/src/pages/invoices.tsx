@@ -2,7 +2,8 @@ import React from "react";
 import { useState } from "react";
 import { NavLink, Outlet, useLocation, useSearchParams } from "react-router-dom";
 import { getInvoices, InvoiceModel } from "../data";
-import "./invoices.css";
+import  styles from "./invoices.module.css";
+console.log(styles);
 type StateModel = {
     invoices: InvoiceModel[]
 }

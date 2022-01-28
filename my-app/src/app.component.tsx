@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, Outlet, RouteObject, useLocation, useRoutes } from "react-router-dom";
+import { Link, Outlet, RouteObject, Routes, useLocation, useRoutes } from "react-router-dom";
 import Expense from './pages/expense';
 import Invoice from './pages/invoice';
 // import Invoices from './pages/invoices';
