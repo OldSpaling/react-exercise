@@ -1,22 +1,38 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { RootState, useAppSelector } from '../../app/store';
-import './posts-list.module.css';
+import PostAuthor from './post-author';
+import CSSModule from './posts-list.module.css';
+import { TimeAgo } from './time-age';
 export const PostList = () => {
     const posts = useAppSelector((state: RootState) => {
         return state.posts;
     });
-    const renderedPosts = posts.map((post) => {
+    //! 在slice之外不能修改状态数据,slice copy一份
+    const renderedPosts = posts.slice().sort((a, b) => {
+        return a.date > b.date ? -1 : 1;
+    }).map((post) => {
         return <article className='post-excerpt' key={post.id}>
-            <h3>{post.title}</h3>
+            <h3>
+                <span>{post.title}</span>
+                <span className="actions">
+                    <NavLink to={`/post/${post.id}`}>View </NavLink>
+                    <NavLink to={`/post/edit/${post.id}`}>Edit</NavLink>
+                </span>
+            </h3>
             <p className='post-content'>{post.content.substring(0, 100)}</p>
+            <p>
+                <PostAuthor userId={post.authorId}></PostAuthor>&nbsp;
+                <TimeAgo timestamp={post.date}></TimeAgo>
+            </p>
+
         </article>
     });
     return (
         <section className='posts-list'>
             <h2>帖子列表</h2>
             <div className="actions">
-                <NavLink to="/list/add">Add</NavLink>
+                <NavLink to="/post/add">Add</NavLink>
             </div>
             {renderedPosts}
         </section>

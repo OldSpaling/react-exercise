@@ -1,3 +1,6 @@
 .posts-list{
     margin-top: 0;
 }
+.post-excerpt h3{
+    display: flex;
+}

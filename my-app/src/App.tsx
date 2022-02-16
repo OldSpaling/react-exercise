@@ -1,19 +1,21 @@
 import React from 'react';
 import './App.css';
-import { BrowserRouter, NavLink, Outlet, Route,Routes } from 'react-router-dom';
+import { BrowserRouter, NavLink, Outlet, Route, Routes } from 'react-router-dom';
 import { Navbar } from './app/Navbar';
 import { PostList } from './features/posts/posts-list';
-import { AddPostForm } from './features/posts/add-post-form';
+import { AddPost } from './features/posts/add-post';
+import { PostDetail } from './features/posts/detail-post';
+import { EditPost } from './features/posts/edit-post';
 
-const Layout=()=>{
-  return(
+const Layout = () => {
+  return (
     <div className='app-container'>
       <header>
-        <Navbar/>
+        <Navbar />
       </header>
       <div className='app-container-content'>
         <nav>
-          <NavLink className="link-item" to="/list">list</NavLink>
+          <NavLink className="link-item" to="/post">Post</NavLink>
         </nav>
         <main>
           <Outlet />
@@ -24,19 +26,23 @@ const Layout=()=>{
 }
 const Welcome = () => {
   return (
-    <h1 style={{textAlign:"center",marginTop:'50px'}}>Welcom to visit</h1>
+    <h1 style={{ textAlign: "center", marginTop: '50px' }}>Welcom to visit</h1>
   );
 };
 function App() {
   return (
     <BrowserRouter>
-     <Routes>
-      <Route path='/' element={<Layout/>}>
-        <Route index element={ <Welcome/>}/>
-        <Route path='list' element={<PostList/>}/>
-        <Route path='list/add' element={<AddPostForm/>}></Route>
-      </Route>
-    </Routes>
+      <Routes>
+        <Route path='/' element={<Layout />}>
+          <Route index element={<Welcome />} />
+          <Route path="post">
+            <Route index element={<PostList />} />
+            <Route path='add' element={<AddPost />}></Route>
+            <Route path=":postId" element={<PostDetail/>}></Route>
+            <Route path="edit/:postId" element={<EditPost/>}></Route>
+          </Route>
+        </Route>
+      </Routes>
     </BrowserRouter>
   );
 }
