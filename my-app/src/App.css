@@ -1,10 +1,25 @@
+.app-container{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.app-container head{
+    height: 50px;
+}
 .app-container-content{
     display: flex;
-    background: #fff;
+    flex:1;
 }
 .app-container-content nav{
     width: 8em;
     border-right: 1px solid #ccc;
+    display: flex;
+    flex-direction: column;
+    background: burlywood;
+}
+.app-container-content nav .link-item{
+    padding: 0.5em 1em;
+    margin: 5px 0;
 }
 .app-container-content main{
     flex:1;

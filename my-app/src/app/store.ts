@@ -6,6 +6,6 @@ const store= configureStore({
         posts:postsReducer
     }
 });
- type RootState = ReturnType<typeof store.getState>
+export type RootState = ReturnType<typeof store.getState>
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
 export default store;
