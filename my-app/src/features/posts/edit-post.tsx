@@ -2,7 +2,7 @@ import React, { ChangeEventHandler, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAppSelector } from '../../app/store';
-import { postUpdatedActionCreator } from './post-slice';
+import { postUpdated } from './post-slice';
 export const EditPost = () => {
     const { postId } = useParams();
     const post = useAppSelector(state => state.posts.find(p => p.id === postId));
@@ -21,7 +21,7 @@ export const EditPost = () => {
     ));
     const onSavePostClicked = () => {
         if (canSave) {
-            dispatch(postUpdatedActionCreator({
+            dispatch(postUpdated({
                 id: postId||'',
                 title,
                 content,

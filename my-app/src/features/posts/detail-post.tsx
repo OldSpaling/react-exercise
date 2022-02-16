@@ -2,6 +2,7 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useAppSelector } from '../../app/store';
 import PostAuthor from './post-author';
+import { ReactionButtons } from './reaction-buttons';
 import { TimeAgo } from './time-age';
 export const PostDetail=()=>{
     const {postId}=useParams();
@@ -20,6 +21,7 @@ export const PostDetail=()=>{
                 <p className='post-content'>{post.content}</p>
                 <PostAuthor userId={post.authorId}></PostAuthor>&nbsp;
                 <TimeAgo timestamp={post.date}></TimeAgo>
+                <ReactionButtons post={post}></ReactionButtons>
             </article>
         </section>
     );

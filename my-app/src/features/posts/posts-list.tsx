@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { RootState, useAppSelector } from '../../app/store';
 import PostAuthor from './post-author';
 import CSSModule from './posts-list.module.css';
+import { ReactionButtons } from './reaction-buttons';
 import { TimeAgo } from './time-age';
 export const PostList = () => {
     const posts = useAppSelector((state: RootState) => {
@@ -21,10 +22,11 @@ export const PostList = () => {
                 </span>
             </h3>
             <p className='post-content'>{post.content.substring(0, 100)}</p>
-            <p>
+            <div>
                 <PostAuthor userId={post.authorId}></PostAuthor>&nbsp;
                 <TimeAgo timestamp={post.date}></TimeAgo>
-            </p>
+                <ReactionButtons post={post}></ReactionButtons>
+            </div>
 
         </article>
     });

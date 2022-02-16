@@ -1,9 +1,8 @@
-import { nanoid } from '@reduxjs/toolkit';
 import React, { ChangeEventHandler, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useAppSelector } from '../../app/store';
-import { postAddedActionCreator } from './post-slice';
+import { postAdded } from './post-slice';
 export const AddPost=()=>{
     const [title,setTitle]=useState('');
     const [content,setContent]=useState('');
@@ -26,7 +25,7 @@ export const AddPost=()=>{
     //submit
     const onSavePostClicked=()=>{
         if(canSave){
-            dispatch(postAddedActionCreator(title,content,authorId))
+            dispatch(postAdded(title,content,authorId))
             setTitle('');
             setContent('');
             setAuthorId('');
