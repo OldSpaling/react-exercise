@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { NavLink, Outlet, useLocation, useSearchParams } from "react-router-dom";
 import { getInvoices, InvoiceModel } from "../data";
-import  styles from "./invoices.module.css";
+import styles from "./invoices.module.css";
 console.log(styles);
 type StateModel = {
     invoices: InvoiceModel[]
@@ -10,14 +10,14 @@ type StateModel = {
 export default function Invoices() {
     const [searchParams, setSearchParams] = useSearchParams();
     const [state, setState] = useState<StateModel>({ invoices: [] })
-    const activeLinkByStyle=({ isActive }:{isActive:boolean}) =>{
+    const activeLinkByStyle = ({ isActive }: { isActive: boolean }) => {
         return {
             display: "block",
             margin: "1rem 0",
             color: isActive ? "red" : ""
         };
     }
-    const activeLinkByClass = ({ isActive }: { isActive: boolean })=>{
+    const activeLinkByClass = ({ isActive }: { isActive: boolean }) => {
         return isActive ? "red" : "blue";
     };
     const handleSearchChange = (event: React.FormEvent<HTMLInputElement>) => {
@@ -28,7 +28,7 @@ export default function Invoices() {
             setSearchParams({});
         }
     };
-    const search = (invoice:InvoiceModel) => {
+    const search = (invoice: InvoiceModel) => {
         let filter = searchParams.get("filter");
         if (!filter) return true;
         let name = invoice.name.toLowerCase();
