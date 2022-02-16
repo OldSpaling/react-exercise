@@ -2,7 +2,8 @@
     "javascript.preferences.importModuleSpecifier": "relative",
     "javascript.suggest.autoImports": true,
     "typescript.preferences.importModuleSpecifier": "relative",
-    "files.autoSaveDelay": 1000,
-    "editor.formatOnSave": false,
-    "javascript.updateImportsOnFileMove.enabled": "always"
+    "files.autoSaveDelay": 750,
+    "editor.formatOnSave": true,
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "files.autoSave": "afterDelay",
 }

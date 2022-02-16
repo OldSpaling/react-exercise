@@ -3,6 +3,7 @@ import './App.css';
 import { BrowserRouter, NavLink, Outlet, Route,Routes } from 'react-router-dom';
 import { Navbar } from './app/Navbar';
 import { PostList } from './features/posts/posts-list';
+import { AddPostForm } from './features/posts/add-post-form';
 const Welcom=()=>{
   return(
     <div className='app-container'>
@@ -27,6 +28,7 @@ function App() {
      <Routes>
       <Route path='/' element={<Welcom/>}>
         <Route path='list' element={<PostList/>}/>
+        <Route path='list/add' element={<AddPostForm/>}></Route>
       </Route>
     </Routes>
     </BrowserRouter>

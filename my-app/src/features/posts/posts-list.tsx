@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 import { useAppSelector } from '../../app/store';
 export const PostList=()=>{
     const posts=useAppSelector((state)=>{
@@ -14,6 +15,9 @@ export const PostList=()=>{
     return(
         <section className='posts-list'>
             <h2>Posts</h2>
+            <div className="actions">
+                <NavLink to="/list/add">Add</NavLink>
+            </div>
             {renderedPosts}
         </section>
     );
