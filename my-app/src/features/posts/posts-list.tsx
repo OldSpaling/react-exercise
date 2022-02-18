@@ -1,14 +1,13 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { RootState, useAppSelector } from '../../app/store';
+import { useAppSelector } from '../../app/store';
 import PostAuthor from './post-author';
+import { selectAllPosts } from './post-slice';
 import CSSModule from './posts-list.module.css';
 import { ReactionButtons } from './reaction-buttons';
 import { TimeAgo } from './time-age';
 export const PostList = () => {
-    const posts = useAppSelector((state: RootState) => {
-        return state.posts;
-    });
+    const posts = useAppSelector(selectAllPosts);
     //! 在slice之外不能修改状态数据,slice copy一份
     const renderedPosts = posts.slice().sort((a, b) => {
         return a.date > b.date ? -1 : 1;

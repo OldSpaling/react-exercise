@@ -1,8 +1,8 @@
 import React, { MouseEventHandler } from "react";
 import { useDispatch } from "react-redux";
-import { PostSliceState, reactionAdded, reactionEmojis } from "./post-slice";
+import { PostModel, PostSliceState, reactionAdded, reactionEmojis } from "./post-slice";
 
-export const ReactionButtons = (props: { post: PostSliceState }) => {
+export const ReactionButtons = (props: { post: PostModel }) => {
   const dispatch=useDispatch()
   const onClick = (reaction:keyof typeof reactionEmojis) => {
     dispatch(reactionAdded({

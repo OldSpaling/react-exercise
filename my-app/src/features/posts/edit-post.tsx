@@ -2,10 +2,10 @@ import React, { ChangeEventHandler, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAppSelector } from '../../app/store';
-import { postUpdated } from './post-slice';
+import { postUpdated, selectPostById } from './post-slice';
 export const EditPost = () => {
     const { postId } = useParams();
-    const post = useAppSelector(state => state.posts.find(p => p.id === postId));
+    const post = useAppSelector(state =>selectPostById(state,postId as string));
     const users=useAppSelector(state=>state.users);
     const [title, setTitle] = useState(post?.title||'');
     const [content, setContent] = useState(post?.content||'');
