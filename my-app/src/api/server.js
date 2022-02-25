@@ -4,7 +4,7 @@ import { nanoid } from '@reduxjs/toolkit'
 import faker from 'faker'
 import seedrandom from 'seedrandom'
 import { Server as MockSocketServer } from 'mock-socket'
-import { setRandom } from 'txtgen'
+// import { setRandom } from 'txtgen'
 
 import { parseISO } from 'date-fns'
 
@@ -38,7 +38,7 @@ if (useSeededRNG) {
   }
 
   rng = seedrandom(randomSeedString)
-  setRandom(rng)
+  Math.random(rng)
   faker.seed(seedDate.getTime())
 }
 

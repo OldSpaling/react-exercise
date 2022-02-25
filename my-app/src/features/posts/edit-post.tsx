@@ -9,7 +9,7 @@ export const EditPost = () => {
     const users=useAppSelector(state=>state.users);
     const [title, setTitle] = useState(post?.title||'');
     const [content, setContent] = useState(post?.content||'');
-    const[authorId,setAuthorId]=useState(post?.authorId||'');
+    const[authorId,setAuthorId]=useState(post?.user||'');
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const onTitleChanged: ChangeEventHandler<HTMLInputElement> = e => setTitle(e.target.value);
@@ -25,7 +25,7 @@ export const EditPost = () => {
                 id: postId||'',
                 title,
                 content,
-                authorId
+                user:authorId
             }))
             navigate(`/post`);
         }

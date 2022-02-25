@@ -20,7 +20,7 @@ export const PostDetail=()=>{
             <article className='post'>
                 <h2>{post.title}</h2>
                 <p className='post-content'>{post.content}</p>
-                <PostAuthor userId={post.authorId}></PostAuthor>&nbsp;
+                <PostAuthor userId={post.user}></PostAuthor>&nbsp;
                 <TimeAgo timestamp={post.date}></TimeAgo>
                 <ReactionButtons post={post}></ReactionButtons>
             </article>

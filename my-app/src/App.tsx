@@ -6,6 +6,8 @@ import { PostList } from './features/posts/posts-list';
 import { AddPost } from './features/posts/add-post';
 import { PostDetail } from './features/posts/detail-post';
 import { EditPost } from './features/posts/edit-post';
+import { UserList } from './features/users/user-list';
+import { UserDetail } from './features/users/detail-user';
 
 const Layout = () => {
   return (
@@ -16,6 +18,7 @@ const Layout = () => {
       <div className='app-container-content'>
         <nav>
           <NavLink className="link-item" to="/post">Post</NavLink>
+          <NavLink className="link-item" to="/users">Users</NavLink>
         </nav>
         <main>
           <Outlet />
@@ -38,10 +41,15 @@ function App() {
           <Route path="post">
             <Route index element={<PostList />} />
             <Route path='add' element={<AddPost />}></Route>
-            <Route path=":postId" element={<PostDetail/>}></Route>
-            <Route path="edit/:postId" element={<EditPost/>}></Route>
+            <Route path=":postId" element={<PostDetail />}></Route>
+            <Route path="edit/:postId" element={<EditPost />}></Route>
+          </Route>
+          <Route path="users">
+            <Route index element={<UserList />}></Route>
+            <Route path=':userId' element={<UserDetail />}></Route>
           </Route>
         </Route>
+
       </Routes>
     </BrowserRouter>
   );
